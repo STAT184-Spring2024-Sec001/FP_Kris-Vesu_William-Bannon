@@ -16,3 +16,19 @@ ggplot() +
   labs(title = "Points by each GOAT",
        x = "Age",
        y = "Points per Game")
+
+ggplot(lebron_data) +
+  aes(x = age, y = pts) +
+  geom_boxplot(fill = "#112446") +
+  theme_minimal() +
+  labs(title = "Points by Lebron",
+       x = "Age",
+       y = "Points per Game")
+
+ggplot(jordan_data) +
+  aes(x = age, y = pts) +
+  geom_boxplot(fill = "#112446") +
+  theme_minimal() +
+  labs(title = "Points by Jordan",
+       x = "Age",
+       y = "Points per Game")

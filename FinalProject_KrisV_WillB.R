@@ -17,18 +17,16 @@ ggplot() +
        x = "Age",
        y = "Points per Game")
 
-ggplot(lebron_data) +
-  aes(x = age, y = pts) +
-  geom_boxplot(fill = "#112446") +
-  theme_minimal() +
-  labs(title = "Points by Lebron",
+ggplot() +
+  geom_boxplot(data = lebron_data, aes(x = age, y = pts), color = "blue") +
+  geom_boxplot(data = jordan_data, aes(x = age, y = pts), color = "red") +
+  labs(title = "Points by each GOAT",
        x = "Age",
        y = "Points per Game")
 
-ggplot(jordan_data) +
-  aes(x = age, y = pts) +
-  geom_boxplot(fill = "#112446") +
-  theme_minimal() +
-  labs(title = "Points by Jordan",
+ggplot() +
+  geom_boxplot(data = lebron_data, aes(x = age, y = ts), color = "blue") +
+  geom_boxplot(data = jordan_data, aes(x = age, y = ts), color = "red") +
+  labs(title = "True Shooting by each GOAT",
        x = "Age",
-       y = "Points per Game")
+       y = "True Shooting per Game")

@@ -29,7 +29,7 @@ ggplot() +
        y = "True Shooting per Game")
 
 sumTable_lebronPts <- lebron_data %>%
-  group_by(pts) %>%
+  group_by(fg) %>%
   summarize(
     count = n(),
     minimum = min(pts, na.rm = TRUE),
@@ -44,7 +44,7 @@ sumTable_lebronPts <- lebron_data %>%
   )
 
 sumTable_lebronTs <- lebron_data %>%
-  group_by(ts) %>%
+  group_by(fg) %>%
   summarize(
     count = n(),
     minimum = min(ts, na.rm = TRUE),
@@ -59,7 +59,7 @@ sumTable_lebronTs <- lebron_data %>%
   )
 
 sumTable_jordanPts <- jordan_data %>%
-  group_by(pts) %>%
+  group_by(fg) %>%
   summarize(
     count = n(),
     minimum = min(pts, na.rm = TRUE),
@@ -74,7 +74,7 @@ sumTable_jordanPts <- jordan_data %>%
   )
 
 sumTable_jordanTs <- jordan_data %>%
-  group_by(ts) %>%
+  group_by(fg) %>%
   summarize(
     count = n(),
     minimum = min(ts, na.rm = TRUE),

@@ -27,3 +27,63 @@ ggplot() +
   labs(title = "True Shooting by each GOAT",
        x = "Age",
        y = "True Shooting per Game")
+
+sumTable_lebronPts <- lebron_data %>%
+  group_by(pts) %>%
+  summarize(
+    count = n(),
+    minimum = min(pts, na.rm = TRUE),
+    firstQuin = quantile(pts, probs = 0.2, na.rm = TRUE),
+    secondQuin = quantile(pts, probs = 0.4, na.rm = TRUE),
+    median = median(pts, na.rm = TRUE),
+    thirdQuin = quantile(pts, probs = 0.6, na.rm = TRUE),
+    fourthQin = quantile(pts, probs = 0.8, na.rm = TRUE),
+    max = max(pts, na.rm = TRUE),
+    SAM = mean(pts, na.rm = TRUE),
+    SASD = sd(pts, na.rm = TRUE)
+  )
+
+sumTable_lebronTs <- lebron_data %>%
+  group_by(ts) %>%
+  summarize(
+    count = n(),
+    minimum = min(ts, na.rm = TRUE),
+    firstQuin = quantile(ts, probs = 0.2, na.rm = TRUE),
+    secondQuin = quantile(ts, probs = 0.4, na.rm = TRUE),
+    median = median(ts, na.rm = TRUE),
+    thirdQuin = quantile(ts, probs = 0.6, na.rm = TRUE),
+    fourthQin = quantile(ts, probs = 0.8, na.rm = TRUE),
+    max = max(ts, na.rm = TRUE),
+    SAM = mean(ts, na.rm = TRUE),
+    SASD = sd(ts, na.rm = TRUE)
+  )
+
+sumTable_jordanPts <- jordan_data %>%
+  group_by(pts) %>%
+  summarize(
+    count = n(),
+    minimum = min(pts, na.rm = TRUE),
+    firstQuin = quantile(pts, probs = 0.2, na.rm = TRUE),
+    secondQuin = quantile(pts, probs = 0.4, na.rm = TRUE),
+    median = median(pts, na.rm = TRUE),
+    thirdQuin = quantile(pts, probs = 0.6, na.rm = TRUE),
+    fourthQin = quantile(pts, probs = 0.8, na.rm = TRUE),
+    max = max(pts, na.rm = TRUE),
+    SAM = mean(pts, na.rm = TRUE),
+    SASD = sd(pts, na.rm = TRUE)
+  )
+
+sumTable_jordanTs <- jordan_data %>%
+  group_by(ts) %>%
+  summarize(
+    count = n(),
+    minimum = min(ts, na.rm = TRUE),
+    firstQuin = quantile(ts, probs = 0.2, na.rm = TRUE),
+    secondQuin = quantile(ts, probs = 0.4, na.rm = TRUE),
+    median = median(ts, na.rm = TRUE),
+    thirdQuin = quantile(ts, probs = 0.6, na.rm = TRUE),
+    fourthQin = quantile(ts, probs = 0.8, na.rm = TRUE),
+    max = max(ts, na.rm = TRUE),
+    SAM = mean(ts, na.rm = TRUE),
+    SASD = sd(ts, na.rm = TRUE)
+  )

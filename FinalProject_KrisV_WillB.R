@@ -15,13 +15,6 @@ lebron_data$ts = (lebron_data$fg + (0.5 * lebron_data$three)) / lebron_data$fga
 jordan_data$ts = (jordan_data$fg + (0.5 * jordan_data$three)) / jordan_data$fga
 
 ggplot() +
-  geom_line(data = lebron_data, aes(x = lebron_data$age, y = lebron_data$pts), color = "blue") +
-  geom_line(data = jordan_data, aes(x = lebron_data$age, y = jordan_data$pts), color = "red") +
-  labs(title = "Points by each GOAT",
-       x = "Age",
-       y = "Points per Game")
-
-ggplot() +
   geom_boxplot(data = lebron_data, aes(x = age, y = pts), color = "blue") +
   geom_boxplot(data = jordan_data, aes(x = age, y = pts), color = "red") +
   labs(title = "Points by each GOAT",

@@ -11,7 +11,6 @@ jordan_data$age <- substr(jordan_data$age, 1, 2)
 write.csv(jordan_data, "modified_jordan_data.csv", row.names = FALSE)
 View(jordan_data)
 
-
 lebron_data$ts = (lebron_data$fg + (0.5 * lebron_data$three)) / lebron_data$fga
 jordan_data$ts = (jordan_data$fg + (0.5 * jordan_data$three)) / jordan_data$fga
 

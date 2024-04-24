@@ -1,4 +1,5 @@
 library(ggplot2)
+library(dplyr)
 
 lebron_data <- read.csv("C:/Users/krisv/Downloads/career_data/lebron_career.csv")
 lebron_data$age <- substr(lebron_data$age, 1, 2)

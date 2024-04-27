@@ -136,3 +136,15 @@ sumTable_jordanTs %>%
     booktabs = TRUE
   ) %>%
   kableExtra::kable_classic()
+
+new_table <- rbind(lebron_data, jordan_data)
+View(new_table)
+
+ggplot() +
+  geom_boxplot(data = new_table, aes(x = age, y = pts, color = name)) +
+  scale_color_manual(values = c("red", "blue")) +
+  labs(title = "Points by each GOAT",
+       x = "Age",
+       y = "Points per Game")
+
+

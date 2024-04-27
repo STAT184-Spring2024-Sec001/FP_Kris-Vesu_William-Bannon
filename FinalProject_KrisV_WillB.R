@@ -1,5 +1,6 @@
 library(ggplot2)
 library(dplyr)
+library(kableExtra)
 
 lebron_data <- read.csv("C:/Users/krisv/Downloads/career_data/lebron_career.csv")
 lebron_data$age <- substr(lebron_data$age, 1, 2)
@@ -87,3 +88,51 @@ sumTable_jordanTs <- jordan_data %>%
     SAM = mean(ts, na.rm = TRUE),
     SASD = sd(ts, na.rm = TRUE)
   )
+
+sumTable_lebronPts %>%
+  kable(
+    digits = 2,
+    format.args = list(big.mark = ","),
+    caption = "Summary Statistics for LeBron Points (by Field Goal)",
+    col.names = c("FG", "Count", "Minimum", "20%-tile", "40%-tile", "Median",
+                  "60%-tile", "80%-tile", "Max", "SAM", "SASD"),
+    align = c("l", rep("c", 10)),
+    booktabs = TRUE
+  ) %>%
+  kableExtra::kable_classic()
+
+sumTable_jordanPts %>%
+  kable(
+    digits = 2,
+    format.args = list(big.mark = ","),
+    caption = "Summary Statistics for Jordan Points (by Field Goal)",
+    col.names = c("FG", "Count", "Minimum", "20%-tile", "40%-tile", "Median",
+                  "60%-tile", "80%-tile", "Max", "SAM", "SASD"),
+    align = c("l", rep("c", 10)),
+    booktabs = TRUE
+  ) %>%
+  kableExtra::kable_classic()
+
+sumTable_lebronTs %>%
+  kable(
+    digits = 2,
+    format.args = list(big.mark = ","),
+    caption = "Summary Statistics for LeBron Total Shooting Percentage (by Field Goal)",
+    col.names = c("FG", "Count", "Minimum", "20%-tile", "40%-tile", "Median",
+                  "60%-tile", "80%-tile", "Max", "SAM", "SASD"),
+    align = c("l", rep("c", 10)),
+    booktabs = TRUE
+  ) %>%
+  kableExtra::kable_classic()
+
+sumTable_jordanTs %>%
+  kable(
+    digits = 2,
+    format.args = list(big.mark = ","),
+    caption = "Summary Statistics for Jordan Total Shooting Percentage (by Field Goal)",
+    col.names = c("FG", "Count", "Minimum", "20%-tile", "40%-tile", "Median",
+                  "60%-tile", "80%-tile", "Max", "SAM", "SASD"),
+    align = c("l", rep("c", 10)),
+    booktabs = TRUE
+  ) %>%
+  kableExtra::kable_classic()

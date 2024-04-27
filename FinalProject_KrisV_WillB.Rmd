@@ -1,30 +1,54 @@
 ---
-title: "Final Project"
-author: "Kris Vesu, Will Bannon"
-date: "2024-04-27"
+title: "Final Project RMD"
+author: "Will Bannon and Kriss Vesu"
 output: html_document
+date: "2024-04-24"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+library(kableExtra)
 ```
 
-## R Markdown
+  We are trying to explore who is the best player in the history of the NBA according to statistical analysis of the two clear cut frontrunners: Lebron James and Michael Jordan. We used many data visualizations, summary tables, and a lot of data wrangling to analyze who might be the better player. 
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+  We retrieved our two datasets from Kaggle with the career statistics of Lebron James and Michael Jordan each in separate datasets. The data was originally compiled for the same purpose we intend to use them, however Kaggle only had a repository of raw data whereas we ran analysis upon said raw data.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+ctrl-alt-i
 
-```{r cars}
-summary(cars)
+
+```{r data wrangling}
+lebron_data <- read.csv("C:/Users/willb/Desktop/desktopfolder/JordanLebronDataset/lebron_career.csv")
+lebron_data$age <- substr(lebron_data$age, 1, 2)
+write.csv(lebron_data, "modified_lebron_data.csv", row.names = FALSE)
+
+jordan_data <- read.csv("C:/Users/willb/Desktop/desktopfolder/JordanLebronDataset/jordan_career.csv")
+jordan_data$age <- substr(jordan_data$age, 1, 2)
+write.csv(jordan_data, "modified_jordan_data.csv", row.names = FALSE)
+
+
+lebron_data$ts = (lebron_data$fg + (0.5 * lebron_data$three)) / lebron_data$fga
+jordan_data$ts = (jordan_data$fg + (0.5 * jordan_data$three)) / jordan_data$fga
+
+lebron_data$name = "LBJ"
+jordan_data$name = "MJ"
+
+new_table <- rbind(lebron_data, jordan_data)
+View(new_table)
+
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+DISCUSS THE GRAPH
+```{r}
+ggplot() +
+  geom_boxplot(data = new_table, aes(x = age, y = pts, color = name)) +
+  scale_color_manual(values = c("red", "blue")) +
+  labs(title = "Points by each GOAT",
+       x = "Age",
+       y = "Points per Game")
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

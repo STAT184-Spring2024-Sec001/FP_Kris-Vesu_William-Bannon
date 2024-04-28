@@ -70,6 +70,29 @@ ggplot() +
        y = "Points per Game")
 ```
 
+By looking at the assist data below we can see that Lebron was indeed better at facilitating scoring for those other than himself. As you can see, Lebron's assist count peaks at 7 assists whereas Jordan's peaks at 4. It can also be seen that Lebron's assist number are significantly more weighted towards the bigger numbers whereas Jordan's are not. All this clearly signifies that Lebron is a better playmaker that tallies far more assists.
+```{r Lebron Assist Data}
+ggplot(lebron_data) +
+  aes(x = ast) +
+  geom_bar() +
+  theme_minimal() +
+  labs(title = "Assist Count by Lebron",
+       x = "Assists",
+       y = "Games"
+  )
+```
+
+```{r Jordan Assist Data}
+ggplot(jordan_data) +
+  aes(x = ast) +
+  geom_bar() +
+  theme_minimal() +
+  labs(title = "Assist Count by Jordan",
+       x = "Assists",
+       y = "Games"
+  )
+```
+
 
 
 

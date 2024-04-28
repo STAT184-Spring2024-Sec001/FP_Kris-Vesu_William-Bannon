@@ -50,7 +50,7 @@ View(new_table)
 ```
 
 
-DISCUSS THE GRAPH
+This graph shows the total points throughout each year of age by both Lebron James and Michael Jordan. Despite the considerable gaps in both players careers, it can be seen that Michael Jordan has quite the edge on Lebron when it comes to statistical points (not taking into account field goals attempted and efficiency).
 ```{r}
 ggplot() +
   geom_boxplot(data = new_table, aes(x = age, y = pts, color = name)) +
@@ -59,4 +59,17 @@ ggplot() +
        x = "Age",
        y = "Points per Game")
 ```
+
+True shooting is an efficiency metric to measure how effective a player is at scoring with volume taken into account and measured. A good true shooting percentage is considered over 55%. As you can see in the graph below Lebron appears to have the edge in efficiency according to the metrics we used.
+```{r true shooting}
+ggplot() +
+  geom_boxplot(data = new_table, aes(x = age, y = ts, color = name)) +
+  scale_color_manual(values = c("red", "blue")) +
+  labs(title = "True Shooting by each GOAT",
+       x = "Age",
+       y = "Points per Game")
+```
+
+
+
 

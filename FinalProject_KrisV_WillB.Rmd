@@ -23,6 +23,8 @@ DO THIS
 
   We intend analyse all sorts of relevant dating relating to the stars, including but not limited to: points, true shooting, assists, field goals, and rebounds. All of these were already attributes of the original dataset, excepting true shooting, which is created by us and is discussed in further detail later in the document.
 
+All data descriptions will be explained before the code chunk, unless the chunk had multiple functions, then the multiple functions will each be detailed and elaborated in the chunk by comments.
+
 Link to kaggle in case there is an issue loading in dataset: https://www.kaggle.com/datasets/edgarhuichen/nba-players-career-game-log/data
 
 

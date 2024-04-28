@@ -20,8 +20,7 @@ DO THIS
   We are trying to explore who is the best player in the history of the NBA according to statistical analysis of the two clear cut frontrunners: Lebron James and Michael Jordan. We used many data visualizations, summary tables, and a lot of data wrangling to analyze who might be the better player. 
 
   We retrieved our two datasets from Kaggle with the career statistics of Lebron James and Michael Jordan each in separate datasets. The data was originally compiled for the same purpose we intend to use them, however Kaggle only had a repository of raw data whereas we ran analysis upon said raw data.
-
-ctrl-alt-i
+Link to kaggle in case there is an issue loading in dataset: https://www.kaggle.com/datasets/edgarhuichen/nba-players-career-game-log/data
 
 
 ```{r data wrangling}

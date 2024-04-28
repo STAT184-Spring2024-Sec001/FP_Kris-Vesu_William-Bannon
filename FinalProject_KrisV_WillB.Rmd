@@ -50,7 +50,7 @@ View(new_table)
 # Points Made By Each Player
 
 This graph shows the total points throughout each year of age by both Lebron James and Michael Jordan. Despite the considerable gaps in both players careers, it can be seen that Michael Jordan has quite the edge on Lebron when it comes to statistical points (not taking into account field goals attempted and efficiency).
-```{r}
+```{r points}
 ggplot() +
   geom_boxplot(data = new_table, aes(x = age, y = pts, color = name)) +
   scale_color_manual(values = c("red", "blue")) +

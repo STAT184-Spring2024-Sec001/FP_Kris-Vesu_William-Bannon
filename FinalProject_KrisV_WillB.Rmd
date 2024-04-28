@@ -12,6 +12,10 @@ library(tidyverse)
 library(ggplot2)
 library(kableExtra)
 ```
+Code should be collapsed/hidden for HTML, and R Notebooks or in a Code Appendix at the end for a PDF.<----
+DO THIS
+
+
 
   We are trying to explore who is the best player in the history of the NBA according to statistical analysis of the two clear cut frontrunners: Lebron James and Michael Jordan. We used many data visualizations, summary tables, and a lot of data wrangling to analyze who might be the better player. 
 

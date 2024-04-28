@@ -32,17 +32,19 @@ write.csv(lebron_data, "modified_lebron_data.csv", row.names = FALSE)
 jordan_data <- read.csv("C:/Users/willb/Desktop/desktopfolder/JordanLebronDataset/jordan_career.csv")
 jordan_data$age <- substr(jordan_data$age, 1, 2)
 write.csv(jordan_data, "modified_jordan_data.csv", row.names = FALSE)
+#In this code we read in the data from our file directory.
 
 
 lebron_data$ts = (lebron_data$fg + (0.5 * lebron_data$three)) / lebron_data$fga
 jordan_data$ts = (jordan_data$fg + (0.5 * jordan_data$three)) / jordan_data$fga
+#In this code we created a new column to our dataset called True Shooting Percentage which measures a players scoring efficiency more aptly than the other columns provided to us in the dataset. The formula for True Shooting Percentage is calculated using field goals made, three point field goals made, and field goals attempted.
 
 lebron_data$name = "LBJ"
 jordan_data$name = "MJ"
 
 new_table <- rbind(lebron_data, jordan_data)
 View(new_table)
-
+#In this code we combined the two data sets into one singular table so that we might begin data manipulation with more ease. The new table can be viewed here.
 ```
 
 

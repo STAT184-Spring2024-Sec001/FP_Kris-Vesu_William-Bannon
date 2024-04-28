@@ -1,6 +1,6 @@
 ---
 title: "Final Project RMD"
-author: "Will Bannon and Kriss Vesu"
+author: "Will Bannon and Kris Vesu"
 output: html_document
 date: "2024-04-24"
 ---
@@ -12,28 +12,24 @@ library(tidyverse)
 library(ggplot2)
 library(kableExtra)
 ```
-Code should be collapsed/hidden for HTML, and R Notebooks or in a Code Appendix at the end for a PDF.<----
-DO THIS
 
+# Introduction
 
+We are trying to explore who is the best player in the history of the NBA according to statistical analysis of the two clear-cut frontrunners: Lebron James and Michael Jordan. We used many data visualizations, summary tables, and much data wrangling to analyze who might be the better player. 
 
-  We are trying to explore who is the best player in the history of the NBA according to statistical analysis of the two clear cut frontrunners: Lebron James and Michael Jordan. We used many data visualizations, summary tables, and a lot of data wrangling to analyze who might be the better player. 
+We retrieved our two datasets from Kaggle with the career statistics of Lebron James and Michael Jordan in separate datasets. The data was originally compiled for the same purpose we intend to use, however, Kaggle only had a repository of raw data whereas we ran analysis upon said raw data.
 
-  We retrieved our two datasets from Kaggle with the career statistics of Lebron James and Michael Jordan each in separate datasets. The data was originally compiled for the same purpose we intend to use them, however Kaggle only had a repository of raw data whereas we ran analysis upon said raw data.
+We intend to analyze all sorts of relevant dating relating to the stars, including but not limited to: points, true shooting, assists, field goals, and rebounds. All of these were already attributes of the original dataset, except true shooting, which was created by us and is discussed in further detail later in the document.
 
-  We intend analyse all sorts of relevant dating relating to the stars, including but not limited to: points, true shooting, assists, field goals, and rebounds. All of these were already attributes of the original dataset, excepting true shooting, which is created by us and is discussed in further detail later in the document.
-
-All data descriptions will be explained before the code chunk, unless the chunk had multiple functions, then the multiple functions will each be detailed and elaborated in the chunk by comments.
-
-Link to kaggle in case there is an issue loading in dataset: https://www.kaggle.com/datasets/edgarhuichen/nba-players-career-game-log/data
+Link to Kaggle in case there is an issue loading in the dataset: https://www.kaggle.com/datasets/edgarhuichen/nba-players-career-game-log/data
 
 
 ```{r data wrangling}
-lebron_data <- read.csv("C:/Users/willb/Desktop/desktopfolder/JordanLebronDataset/lebron_career.csv")
+lebron_data <- read.csv("C:/Users/krisv/Downloads/career_data/lebron_career.csv")
 lebron_data$age <- substr(lebron_data$age, 1, 2)
 write.csv(lebron_data, "modified_lebron_data.csv", row.names = FALSE)
 
-jordan_data <- read.csv("C:/Users/willb/Desktop/desktopfolder/JordanLebronDataset/jordan_career.csv")
+jordan_data <- read.csv("C:/Users/krisv/Downloads/career_data/jordan_career.csv")
 jordan_data$age <- substr(jordan_data$age, 1, 2)
 write.csv(jordan_data, "modified_jordan_data.csv", row.names = FALSE)
 #In this code we read in the data from our file directory.
@@ -51,6 +47,7 @@ View(new_table)
 #In this code we combined the two data sets into one singular table so that we might begin data manipulation with more ease. The new table can be viewed here.
 ```
 
+# Points Made By Each Player
 
 This graph shows the total points throughout each year of age by both Lebron James and Michael Jordan. Despite the considerable gaps in both players careers, it can be seen that Michael Jordan has quite the edge on Lebron when it comes to statistical points (not taking into account field goals attempted and efficiency).
 ```{r}
@@ -61,8 +58,9 @@ ggplot() +
        x = "Age",
        y = "Points per Game")
 ```
+# True Shooting Percentage of Each Player
 
-True shooting is an efficiency metric to measure how effective a player is at scoring with volume taken into account and measured. A good true shooting percentage is considered over 55%. As you can see in the graph below Lebron appears to have the edge in efficiency according to the metrics we used.
+True Shooting is an efficiency metric to measure how effective a player is at scoring with volume taken into account and measured. A good true shooting percentage is considered over 55%. As you can see in the graph below Lebron appears to have the edge in efficiency according to the metrics we used.
 ```{r true shooting}
 ggplot() +
   geom_boxplot(data = new_table, aes(x = age, y = ts, color = name)) +
@@ -71,6 +69,7 @@ ggplot() +
        x = "Age",
        y = "Points per Game")
 ```
+# Assists by Each Player
 
 By looking at the assist data below we can see that Lebron was indeed better at facilitating scoring for those other than himself. As you can see, Lebron's assist count peaks at 7 assists whereas Jordan's peaks at 4. It can also be seen that Lebron's assist number are significantly more weighted towards the bigger numbers whereas Jordan's are not. All this clearly signifies that Lebron is a better playmaker that tallies far more assists.
 ```{r Lebron Assist Data}
@@ -94,31 +93,128 @@ ggplot(jordan_data) +
        y = "Games"
   )
 ```
+# Summary Tables - Points by Field Goal
 
-Threepointers are one of the most prominent facets of the modern nba and it is quite novel in its modern popularity as well. Looking at these stats its very clear which player was in the league in the 90s and which one was in the modern era. Theres no contest in these statistics; Lebron is categorically a better three point shooter and the numbers show it. Just squinting at the graphs you can see the difference in three pointers made. Jordan has twice as many games with zero threepointers as he does with any single made threepointer and can clearly not keep up with Lebron's prominence in the category.
-```{r Lebron James Three Pointers}
-ggplot(lebron_data) +
-  aes(x = three) +
-  geom_bar() +
-  theme_minimal() +
-  labs(title = "Three Pointers by Lebron",
-       x = "Threepointers",
-       y = "Games"
-  )
-```
+The following summary tables show off the amount of field goals both players have made, which is signified under the count column. For the rest of the columns, we can see the minimum and maximum amount of points made, the first through fourth quintiles of each game in points, the mean and median amount of points and the standard deviation of the points. 
 
-```{r Michael Jordan Three Pointers}
-ggplot(jordan_data) +
-  aes(x = three) +
-  geom_bar() +
-  theme_minimal() +
-  labs(title = "Three Pointers by Jordan",
-       x = "Threepointers",
-       y = "Games"
+```{r Lebron Summary Table - Points}
+sumTable_lebronPts <- lebron_data %>%
+  group_by(fg) %>%
+  summarize(
+    count = n(),
+    minimum = min(pts, na.rm = TRUE),
+    firstQuin = quantile(pts, probs = 0.2, na.rm = TRUE),
+    secondQuin = quantile(pts, probs = 0.4, na.rm = TRUE),
+    median = median(pts, na.rm = TRUE),
+    thirdQuin = quantile(pts, probs = 0.6, na.rm = TRUE),
+    fourthQin = quantile(pts, probs = 0.8, na.rm = TRUE),
+    max = max(pts, na.rm = TRUE),
+    SAM = mean(pts, na.rm = TRUE),
+    SASD = sd(pts, na.rm = TRUE)
   )
 
+sumTable_lebronPts %>%
+  kable(
+    digits = 2,
+    format.args = list(big.mark = ","),
+    caption = "Summary Statistics for LeBron Points (by Field Goal)",
+    col.names = c("FG", "Count", "Minimum", "20%-tile", "40%-tile", "Median",
+                  "60%-tile", "80%-tile", "Max", "SAM", "SASD"),
+    align = c("l", rep("c", 10)),
+    booktabs = TRUE
+  ) %>%
+  kableExtra::kable_classic()
 ```
 
+```{r Jordan Summary Table - Points}
+sumTable_jordanPts <- jordan_data %>%
+  group_by(fg) %>%
+  summarize(
+    count = n(),
+    minimum = min(pts, na.rm = TRUE),
+    firstQuin = quantile(pts, probs = 0.2, na.rm = TRUE),
+    secondQuin = quantile(pts, probs = 0.4, na.rm = TRUE),
+    median = median(pts, na.rm = TRUE),
+    thirdQuin = quantile(pts, probs = 0.6, na.rm = TRUE),
+    fourthQin = quantile(pts, probs = 0.8, na.rm = TRUE),
+    max = max(pts, na.rm = TRUE),
+    SAM = mean(pts, na.rm = TRUE),
+    SASD = sd(pts, na.rm = TRUE)
+  )
 
+sumTable_jordanPts %>%
+  kable(
+    digits = 2,
+    format.args = list(big.mark = ","),
+    caption = "Summary Statistics for Jordan Points (by Field Goal)",
+    col.names = c("FG", "Count", "Minimum", "20%-tile", "40%-tile", "Median",
+                  "60%-tile", "80%-tile", "Max", "SAM", "SASD"),
+    align = c("l", rep("c", 10)),
+    booktabs = TRUE
+  ) %>%
+  kableExtra::kable_classic()
+```
 
+# Summary Tables - Total Shooting by Field Goal
 
+The following summary tables show off the amount of field goals both players have made, which is signified under the count column. For the rest of the columns, we can see the minimum and maximum amount efficiency, the first through fourth quintiles of each game that was efficient, the mean and median amount of efficiency and the standard deviation efficiency.
+
+```{r Lebron Summary Table - Total Shooting Percentage}
+sumTable_lebronTs <- lebron_data %>%
+  group_by(fg) %>%
+  summarize(
+    count = n(),
+    minimum = min(ts, na.rm = TRUE),
+    firstQuin = quantile(ts, probs = 0.2, na.rm = TRUE),
+    secondQuin = quantile(ts, probs = 0.4, na.rm = TRUE),
+    median = median(ts, na.rm = TRUE),
+    thirdQuin = quantile(ts, probs = 0.6, na.rm = TRUE),
+    fourthQin = quantile(ts, probs = 0.8, na.rm = TRUE),
+    max = max(ts, na.rm = TRUE),
+    SAM = mean(ts, na.rm = TRUE),
+    SASD = sd(ts, na.rm = TRUE)
+  )
+
+sumTable_lebronTs %>%
+  kable(
+    digits = 2,
+    format.args = list(big.mark = ","),
+    caption = "Summary Statistics for LeBron Total Shooting Percentage (by Field Goal)",
+    col.names = c("FG", "Count", "Minimum", "20%-tile", "40%-tile", "Median",
+                  "60%-tile", "80%-tile", "Max", "SAM", "SASD"),
+    align = c("l", rep("c", 10)),
+    booktabs = TRUE
+  ) %>%
+  kableExtra::kable_classic()
+```
+
+```{r Jordan Summary Table - Total Shooting Percentage}
+sumTable_jordanTs <- jordan_data %>%
+  group_by(fg) %>%
+  summarize(
+    count = n(),
+    minimum = min(ts, na.rm = TRUE),
+    firstQuin = quantile(ts, probs = 0.2, na.rm = TRUE),
+    secondQuin = quantile(ts, probs = 0.4, na.rm = TRUE),
+    median = median(ts, na.rm = TRUE),
+    thirdQuin = quantile(ts, probs = 0.6, na.rm = TRUE),
+    fourthQin = quantile(ts, probs = 0.8, na.rm = TRUE),
+    max = max(ts, na.rm = TRUE),
+    SAM = mean(ts, na.rm = TRUE),
+    SASD = sd(ts, na.rm = TRUE)
+  )
+
+sumTable_jordanTs %>%
+  kable(
+    digits = 2,
+    format.args = list(big.mark = ","),
+    caption = "Summary Statistics for Jordan Total Shooting Percentage (by Field Goal)",
+    col.names = c("FG", "Count", "Minimum", "20%-tile", "40%-tile", "Median",
+                  "60%-tile", "80%-tile", "Max", "SAM", "SASD"),
+    align = c("l", rep("c", 10)),
+    booktabs = TRUE
+  ) %>%
+  kableExtra::kable_classic()
+```
+
+# Conclusion

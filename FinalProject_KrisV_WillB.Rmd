@@ -93,6 +93,30 @@ ggplot(jordan_data) +
   )
 ```
 
+Threepointers are one of the most prominent facets of the modern nba and it is quite novel in its modern popularity as well. Looking at these stats its very clear which player was in the league in the 90s and which one was in the modern era. Theres no contest in these statistics; Lebron is categorically a better three point shooter and the numbers show it. Just squinting at the graphs you can see the difference in three pointers made. Jordan has twice as many games with zero threepointers as he does with any single made threepointer and can clearly not keep up with Lebron's prominence in the category.
+```{r Lebron James Three Pointers}
+ggplot(lebron_data) +
+  aes(x = three) +
+  geom_bar() +
+  theme_minimal() +
+  labs(title = "Three Pointers by Lebron",
+       x = "Threepointers",
+       y = "Games"
+  )
+```
+
+```{r Michael Jordan Three Pointers}
+ggplot(jordan_data) +
+  aes(x = three) +
+  geom_bar() +
+  theme_minimal() +
+  labs(title = "Three Pointers by Jordan",
+       x = "Threepointers",
+       y = "Games"
+  )
+
+```
+
 
 
 

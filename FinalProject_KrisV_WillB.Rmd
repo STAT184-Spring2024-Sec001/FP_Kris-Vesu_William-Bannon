@@ -1,8 +1,13 @@
 ---
 title: "Final Project RMD"
 author: "Will Bannon and Kris Vesu"
-output: html_document
 date: "2024-04-24"
+output: 
+  html_document:
+    code_folding: hide
+    number_sections: true
+    toc: true
+    toc_float: true
 ---
 
 ```{r setup, include=FALSE}
@@ -219,3 +224,19 @@ sumTable_jordanTs %>%
 
 # Conclusion
 Overall we have Lebron overtaking Jordan in most statistical categories, but basketball is of course not just a game of stats. Declaring the greatest player of all time is not something to be rushed and declaring a victor off of pure statistics would be unfair to the intangibles that can't be measured by personal statistics. Alas, the data and statistics we have examined and manipulated do favor the notion that Lebron James is a better basketball player than Michael Jordan. As an aside, we did discover some things from the datasets that we were surprised about. While we knew Lebron was a better three point shooter, we did not realize just how drastic the different in threepointers was between the stars and were quite surprised.
+
+ggplot(lebron_data) +
+  aes(x = three) +
+  geom_bar() +
+  theme_minimal() +
+  labs(title = "Three Pointers by Lebron",
+       x = "Age",
+       y = "Games")
+
+ggplot(jordan_data) +
+  aes(x = three) +
+  geom_bar() +
+  theme_minimal() +
+  labs(title = "Three Pointers by Jordan",
+       x = "Three Pointers",
+       y = "Games")

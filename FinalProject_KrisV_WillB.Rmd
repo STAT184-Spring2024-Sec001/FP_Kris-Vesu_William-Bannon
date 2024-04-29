@@ -19,7 +19,7 @@ We are trying to explore who is the best player in the history of the NBA accord
 
 We retrieved our two datasets from Kaggle with the career statistics of Lebron James and Michael Jordan in separate datasets. The data was originally compiled for the same purpose we intend to use, however, Kaggle only had a repository of raw data whereas we ran analysis upon said raw data.
 
-We intend to analyze all sorts of relevant dating relating to the stars, including but not limited to: points, true shooting, assists, field goals, and rebounds. All of these were already attributes of the original dataset, except true shooting, which was created by us and is discussed in further detail later in the document.
+We intend to analyze all sorts of relevant dating relating to the stars, including but not limited to: points, true shooting, assists, field goals, and rebounds. These statistics will help us analyze each players individual stats to determine who is the better player overall. All of these were already attributes of the original dataset, except true shooting, which was created by us and is discussed in further detail later in the document.
 
 Link to Kaggle in case there is an issue loading in the dataset: https://www.kaggle.com/datasets/edgarhuichen/nba-players-career-game-log/data
 

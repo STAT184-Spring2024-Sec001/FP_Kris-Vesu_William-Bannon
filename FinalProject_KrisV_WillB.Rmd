@@ -95,7 +95,7 @@ ggplot(jordan_data) +
 ```
 # Summary Tables - Points by Field Goal
 
-The following summary tables show off the amount of field goals both players have made, which is signified under the count column. For the rest of the columns, we can see the minimum and maximum amount of points made, the first through fourth quintiles of each game in points, the mean and median amount of points and the standard deviation of the points. 
+The following summary tables show off the amount of field goals both players have made, which is signified under the count column. For the rest of the columns, we can see the minimum and maximum amount of points made, the first through fourth quintiles of each game in points, the mean and median amount of points and the standard deviation of the points. As we can see Lebron does lead a lot in most of these categories, however this can mostly be chalked up to how often Lebrons takes three point shots compared to Jordan, which of course have more points per field goal.
 
 ```{r Lebron Summary Table - Points}
 sumTable_lebronPts <- lebron_data %>%
@@ -157,7 +157,7 @@ sumTable_jordanPts %>%
 
 # Summary Tables - Total Shooting by Field Goal
 
-The following summary tables show off the amount of field goals both players have made, which is signified under the count column. For the rest of the columns, we can see the minimum and maximum amount efficiency, the first through fourth quintiles of each game that was efficient, the mean and median amount of efficiency and the standard deviation efficiency.
+The following summary tables show off the amount of field goals both players have made, which is signified under the count column. For the rest of the columns, we can see the minimum and maximum amount efficiency, the first through fourth quintiles of each game that was efficient, the mean and median amount of efficiency and the standard deviation efficiency. Examining the data we can see that Lebron's true shooting percentage elevates with the field goals he takes and he manages to to best Jordan in plenty of categories, especially the median values.
 
 ```{r Lebron Summary Table - Total Shooting Percentage}
 sumTable_lebronTs <- lebron_data %>%
@@ -218,3 +218,4 @@ sumTable_jordanTs %>%
 ```
 
 # Conclusion
+Overall we have Lebron overtaking Jordan in most statistical categories, but basketball is of course not just a game of stats. Declaring the greatest player of all time is not something to be rushed and declaring a victor off of pure statistics would be unfair to the intangibles that can't be measured by personal statistics. Alas, the data and statistics we have examined and manipulated do favor the notion that Lebron James is a better basketball player than Michael Jordan.

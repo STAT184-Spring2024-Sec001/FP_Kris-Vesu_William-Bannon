@@ -32,7 +32,7 @@ write.csv(lebron_data, "modified_lebron_data.csv", row.names = FALSE)
 jordan_data <- read.csv("C:/Users/krisv/Downloads/career_data/jordan_career.csv")
 jordan_data$age <- substr(jordan_data$age, 1, 2)
 write.csv(jordan_data, "modified_jordan_data.csv", row.names = FALSE)
-#In this code we read in the data from our file directory and truncate the string values of each players ages to just years and not days.
+#In this code we read in the data from our file directory and truncate the string values of each players ages to just years and not days so that it might function for graphing purpose.
 
 
 lebron_data$ts = (lebron_data$fg + (0.5 * lebron_data$three)) / lebron_data$fga

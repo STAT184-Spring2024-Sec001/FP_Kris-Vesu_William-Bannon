@@ -1,13 +1,8 @@
 ---
 title: "Final Project RMD"
 author: "Will Bannon and Kris Vesu"
+output: html_document
 date: "2024-04-24"
-output: 
-  html_document:
-    code_folding: hide
-    number_sections: true
-    toc: true
-    toc_float: true
 ---
 
 ```{r setup, include=FALSE}
@@ -24,21 +19,19 @@ We are trying to explore who is the best player in the history of the NBA accord
 
 We retrieved our two datasets from Kaggle with the career statistics of Lebron James and Michael Jordan in separate datasets. The data was originally compiled for the same purpose we intend to use, however, Kaggle only had a repository of raw data whereas we ran analysis upon said raw data.
 
-We intend to analyze all sorts of relevant dating relating to the stars, including but not limited to: points, true shooting, assists, field goals, and rebounds. These statistics will help us analyze each players individual stats to determine who is the better player overall. All of these were already attributes of the original dataset, except true shooting, which was created by us and is discussed in further detail later in the document.
+We intend to analyze all sorts of relevant dating relating to the stars, including but not limited to: points, true shooting, assists, field goals, and rebounds. All of these were already attributes of the original dataset, except true shooting, which was created by us and is discussed in further detail later in the document.
 
 Link to Kaggle in case there is an issue loading in the dataset: https://www.kaggle.com/datasets/edgarhuichen/nba-players-career-game-log/data
-We have also uploaded both datasets into our GitHub repository. 
 
 ```{r data wrangling}
-lebron_data <- read.csv("lebron_career.csv")
+lebron_data <- read.csv("C:/Users/krisv/Downloads/career_data/lebron_career.csv")
 lebron_data$age <- substr(lebron_data$age, 1, 2)
 write.csv(lebron_data, "modified_lebron_data.csv", row.names = FALSE)
 
-jordan_data <- read.csv("jordan_career.csv")
+jordan_data <- read.csv("C:/Users/krisv/Downloads/career_data/jordan_career.csv")
 jordan_data$age <- substr(jordan_data$age, 1, 2)
 write.csv(jordan_data, "modified_jordan_data.csv", row.names = FALSE)
-#In this code we read in the data from our file directory and truncate the string values of each players ages to just years and not days so that it might function for graphing purpose.
-
+#In this code we read in the data from our file directory.
 
 lebron_data$ts = (lebron_data$fg + (0.5 * lebron_data$three)) / lebron_data$fga
 jordan_data$ts = (jordan_data$fg + (0.5 * jordan_data$three)) / jordan_data$fga
@@ -47,36 +40,64 @@ jordan_data$ts = (jordan_data$fg + (0.5 * jordan_data$three)) / jordan_data$fga
 lebron_data$name = "LBJ"
 jordan_data$name = "MJ"
 
-full_table <- rbind(lebron_data, jordan_data)
-View(full_table)
+new_table <- rbind(lebron_data, jordan_data)
+View(new_table)
 #In this code we combined the two data sets into one singular table so that we might begin data manipulation with more ease. The new table can be viewed here.
 ```
 
 # Points Made By Each Player
 
 This graph shows the total points throughout each year of age by both Lebron James and Michael Jordan. Despite the considerable gaps in both players careers, it can be seen that Michael Jordan has quite the edge on Lebron when it comes to statistical points (not taking into account field goals attempted and efficiency).
+
 ```{r points}
 ggplot() +
-  geom_boxplot(data = full_table, aes(x = age, y = pts, color = name)) +
+  geom_boxplot(data = new_table, aes(x = age, y = pts, color = name)) +
   scale_color_manual(values = c("red", "blue")) +
   labs(title = "Points by each GOAT",
        x = "Age",
        y = "Points per Game")
 ```
+
 # True Shooting Percentage of Each Player
 
 True Shooting is an efficiency metric to measure how effective a player is at scoring with volume taken into account and measured. A good true shooting percentage is considered over 55%. As you can see in the graph below Lebron appears to have the edge in efficiency according to the metrics we used.
+
 ```{r true shooting}
 ggplot() +
-  geom_boxplot(data = full_table, aes(x = age, y = ts, color = name)) +
+  geom_boxplot(data = new_table, aes(x = age, y = ts, color = name)) +
   scale_color_manual(values = c("red", "blue")) +
   labs(title = "True Shooting by each GOAT",
        x = "Age",
        y = "Points per Game")
 ```
+
+# Three Pointers by Each Player 
+
+By looking at the data below for both players, we can see that Jordan has played more games where he had made 0 three-pointers compared to Lebron. Jordan also has more games where he made 0 threes than games where he has made at least 1 three-pointer combined. Looking at Lebron's data, we can see that the number of games that he made either 0 or 1 three-pointers is very similar. We can also see that Lebron had games where he had either 7 or 8 three-pointers made, whereas Jordan's max amount of three-pointers made in a game was 5. 
+
+```{r Lebron Three Pointer Data}
+ggplot(lebron_data) +
+  aes(x = three) +
+  geom_bar() 
+  theme_minimal() +
+  labs(title = "Three Pointers by Lebron",
+       x = "Age",
+       y = "Games")
+```
+```{r Jordan Three Pointer Data}
+ggplot(jordan_data) +
+  aes(x = three) +
+  geom_bar() +
+  theme_minimal() +
+  labs(title = "Three Pointers by Jordan",
+       x = "Three Pointers",
+       y = "Games")
+```
+
 # Assists by Each Player
 
 By looking at the assist data below we can see that Lebron was indeed better at facilitating scoring for those other than himself. As you can see, Lebron's assist count peaks at 7 assists whereas Jordan's peaks at 4. It can also be seen that Lebron's assist number are significantly more weighted towards the bigger numbers whereas Jordan's are not. All this clearly signifies that Lebron is a better playmaker that tallies far more assists.
+
 ```{r Lebron Assist Data}
 ggplot(lebron_data) +
   aes(x = ast) +
@@ -100,7 +121,7 @@ ggplot(jordan_data) +
 ```
 # Summary Tables - Points by Field Goal
 
-The following summary tables show off the amount of field goals both players have made, which is signified under the count column. For the rest of the columns, we can see the minimum and maximum amount of points made, the first through fourth quintiles of each game in points, the mean and median amount of points and the standard deviation of the points. As we can see Lebron does lead a lot in most of these categories, however this can mostly be chalked up to how often Lebrons takes three point shots compared to Jordan, which of course have more points per field goal.
+The following summary tables show off the amount of field goals both players have made, which is signified under the count column. For the rest of the columns, we can see the minimum and maximum amount of points made, the first through fourth quintiles of each game in points, the mean and median amount of points and the standard deviation of the points. 
 
 ```{r Lebron Summary Table - Points}
 sumTable_lebronPts <- lebron_data %>%
@@ -162,7 +183,7 @@ sumTable_jordanPts %>%
 
 # Summary Tables - Total Shooting by Field Goal
 
-The following summary tables show off the amount of field goals both players have made, which is signified under the count column. For the rest of the columns, we can see the minimum and maximum amount efficiency, the first through fourth quintiles of each game that was efficient, the mean and median amount of efficiency and the standard deviation efficiency. Examining the data we can see that Lebron's true shooting percentage elevates with the field goals he takes and he manages to to best Jordan in plenty of categories, especially the median values.
+The following summary tables show off the amount of field goals both players have made, which is signified under the count column. For the rest of the columns, we can see the minimum and maximum amount efficiency, the first through fourth quintiles of each game that was efficient, the mean and median amount of efficiency and the standard deviation efficiency.
 
 ```{r Lebron Summary Table - Total Shooting Percentage}
 sumTable_lebronTs <- lebron_data %>%
@@ -223,20 +244,5 @@ sumTable_jordanTs %>%
 ```
 
 # Conclusion
+
 Overall we have Lebron overtaking Jordan in most statistical categories, but basketball is of course not just a game of stats. Declaring the greatest player of all time is not something to be rushed and declaring a victor off of pure statistics would be unfair to the intangibles that can't be measured by personal statistics. Alas, the data and statistics we have examined and manipulated do favor the notion that Lebron James is a better basketball player than Michael Jordan. As an aside, we did discover some things from the datasets that we were surprised about. While we knew Lebron was a better three point shooter, we did not realize just how drastic the different in threepointers was between the stars and were quite surprised.
-
-ggplot(lebron_data) +
-  aes(x = three) +
-  geom_bar() +
-  theme_minimal() +
-  labs(title = "Three Pointers by Lebron",
-       x = "Age",
-       y = "Games")
-
-ggplot(jordan_data) +
-  aes(x = three) +
-  geom_bar() +
-  theme_minimal() +
-  labs(title = "Three Pointers by Jordan",
-       x = "Three Pointers",
-       y = "Games")

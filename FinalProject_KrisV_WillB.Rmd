@@ -42,8 +42,8 @@ jordan_data$ts = (jordan_data$fg + (0.5 * jordan_data$three)) / jordan_data$fga
 lebron_data$name = "LBJ"
 jordan_data$name = "MJ"
 
-new_table <- rbind(lebron_data, jordan_data)
-View(new_table)
+full_table <- rbind(lebron_data, jordan_data)
+View(full_table)
 #In this code we combined the two data sets into one singular table so that we might begin data manipulation with more ease. The new table can be viewed here.
 ```
 
@@ -52,7 +52,7 @@ View(new_table)
 This graph shows the total points throughout each year of age by both Lebron James and Michael Jordan. Despite the considerable gaps in both players careers, it can be seen that Michael Jordan has quite the edge on Lebron when it comes to statistical points (not taking into account field goals attempted and efficiency).
 ```{r points}
 ggplot() +
-  geom_boxplot(data = new_table, aes(x = age, y = pts, color = name)) +
+  geom_boxplot(data = full_table, aes(x = age, y = pts, color = name)) +
   scale_color_manual(values = c("red", "blue")) +
   labs(title = "Points by each GOAT",
        x = "Age",
@@ -63,7 +63,7 @@ ggplot() +
 True Shooting is an efficiency metric to measure how effective a player is at scoring with volume taken into account and measured. A good true shooting percentage is considered over 55%. As you can see in the graph below Lebron appears to have the edge in efficiency according to the metrics we used.
 ```{r true shooting}
 ggplot() +
-  geom_boxplot(data = new_table, aes(x = age, y = ts, color = name)) +
+  geom_boxplot(data = full_table, aes(x = age, y = ts, color = name)) +
   scale_color_manual(values = c("red", "blue")) +
   labs(title = "True Shooting by each GOAT",
        x = "Age",

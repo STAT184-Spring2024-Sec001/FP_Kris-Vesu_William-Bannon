@@ -22,14 +22,14 @@ We retrieved our two datasets from Kaggle with the career statistics of Lebron J
 We intend to analyze all sorts of relevant dating relating to the stars, including but not limited to: points, true shooting, assists, field goals, and rebounds. These statistics will help us analyze each players individual stats to determine who is the better player overall. All of these were already attributes of the original dataset, except true shooting, which was created by us and is discussed in further detail later in the document.
 
 Link to Kaggle in case there is an issue loading in the dataset: https://www.kaggle.com/datasets/edgarhuichen/nba-players-career-game-log/data
-
+We have also uploaded both datasets into our GitHub repository. 
 
 ```{r data wrangling}
-lebron_data <- read.csv("C:/Users/krisv/Downloads/career_data/lebron_career.csv")
+lebron_data <- read.csv("lebron_career.csv")
 lebron_data$age <- substr(lebron_data$age, 1, 2)
 write.csv(lebron_data, "modified_lebron_data.csv", row.names = FALSE)
 
-jordan_data <- read.csv("C:/Users/krisv/Downloads/career_data/jordan_career.csv")
+jordan_data <- read.csv("jordan_career.csv")
 jordan_data$age <- substr(jordan_data$age, 1, 2)
 write.csv(jordan_data, "modified_jordan_data.csv", row.names = FALSE)
 #In this code we read in the data from our file directory and truncate the string values of each players ages to just years and not days so that it might function for graphing purpose.
